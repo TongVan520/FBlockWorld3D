@@ -12,6 +12,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "FBlockWorld3D.h"
+#include "FSignal/FSignal.h"
 
 using namespace godot;
 
@@ -21,6 +22,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	}
 
 	GDREGISTER_CLASS(FBlockWorld3D);
+	FRegisterFSignal;
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
