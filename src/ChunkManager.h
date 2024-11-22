@@ -7,6 +7,8 @@
 
 #include <godot_cpp/templates/hash_map.hpp>
 #include <godot_cpp/variant/vector3i.hpp>
+#include "FSignal/FSignal.h"
+#include <godot_cpp/classes/ref.hpp>
 
 namespace fireflower {
 	using namespace godot;
@@ -38,7 +40,26 @@ namespace fireflower {
 		/// @描述 键：区块下标\n
 		/// 值：区块状态
 		HashMap<Vector3i, ChunkState> chunk_stateMap;
+		
+		/// @名称 区块加载完成信号
+		Ref<FSignal1> chunkLoaded;
+		
+		/// @名称 区块卸载完成信号
+		Ref<FSignal1> chunkUnloaded;
 	
+	public:
+		/// @名称 区块加载请求
+		/// @描述 当区块真正需要加载时发出
+		FSignal1 chunkLoadRequested;
+		
+		/// @名称 区块卸载请求
+		/// @描述 当区块真正需要卸载时发出
+		FSignal1 chunkUnloadRequested;
+	
+	private:
+		void onChunkLoaded(const Vector3i& chunk_positionVec3i);
+		void onChunkUnloaded(const Vector3i& chunk_positionVec3i);
+		
 	public:
 		/// @名称 获取区块状态
 		/// @参数名称 chunk_positionVec3i
@@ -58,6 +79,8 @@ namespace fireflower {
 		/// @参数描述 区块下标位置
 		void unloadChunk(const Vector3i& chunk_positionVec3i);
 		
+		void setLoadedSignal(const Ref<FSignal1>& loadedSignal);
+		void setUnloadedSignal(const Ref<FSignal1>& unloadedSignal);
 	};
 	
 } // fireflower

@@ -18,4 +18,6 @@ add_library(FBlockWorld3D SHARED
         src/ChunkManager.h
         src/FSignal/FSignal.cpp
         src/FSignal/FSignal.h
+        src/FCallable/FCallable.cpp
+        src/FCallable/FCallable.h
 )
