@@ -20,7 +20,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	GDREGISTER_CLASS(FBlockWorld3D);
+	GDREGISTER_CLASS(fireflower::FBlockWorld3D);
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
