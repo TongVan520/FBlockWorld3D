@@ -1,17 +1,20 @@
-# 忽略CLion文件
+# CLion文件
+cmake-build-*/
 .idea/
-cmake-build-debug/
+
+# 二进制文件
 bin/
-godot-cpp/
-*.pdb
-*.dblite
-*.obj
+lib/
+
+# 自己的第三方库文件
+tool/
 
 # Godot 4+ specific ignores
 .godot/
 
 # Godot-specific ignores
 .import/
+*.import
 export.cfg
 export_presets.cfg
 

@@ -11,7 +11,7 @@
 #include <godot_cpp/classes/grid_map.hpp>
 #include <godot_cpp/classes/ref.hpp>
 
-#include "GodotHelper/GodotHelper.h"
+#include "../GodotHelper/GodotHelper.h"
 
 namespace godot {
 	/// @类名 3D方块世界
@@ -42,12 +42,6 @@ namespace godot {
 		Vector3i current_chunk_positionVec3i = Vector3i(0, 0, 0);
 	
 	public:
-		FBlockWorld3D() = default;
-		virtual ~FBlockWorld3D() = default;
-		FBlockWorld3D(const FBlockWorld3D&) = delete;
-		
-		// FBlockWorld3D& operator=(const FBlockWorld3D&) = delete;
-		
 		/// @名称 SayHello
 		/// @描述 测试用，静态函数
 		static void sayHello();

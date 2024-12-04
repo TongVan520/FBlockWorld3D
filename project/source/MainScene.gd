@@ -1,6 +1,9 @@
 extends Node
 
 func _ready() -> void:
+	self.connectSignal()
+	self.testSignalAndCallable()
+	
 	# FBlockWorld3D.sayHello()
 	# var bw = FBlockWorld3D.new()
 	# bw.chunk_sizeVec3i = Vector3i(5, 5, 5)
@@ -66,5 +69,33 @@ func _ready() -> void:
 	
 	pass
 
+func connectSignal():
+	# var f := FCallable1.make(
+	# 	func(textStr: String):
+	# 		print(textStr);
+	# 		pass
+	# )
+	# self.said.connect(f)
+	
+	self.said.connect(
+		FCallable1.make(
+			(func(textStr: String):
+				print(textStr);
+				pass )
+		)
+	)
+	# print("isConnected == ", self.said.isConnected(f))
+	for s in self.said.get_signal_list():
+		print(s["name"], self.said.get_signal_connection_list(s["name"]))
+		pass
+	pass
+
+static var said := FSignal1.new()
+
 func testSignalAndCallable() -> void:
+	for s in self.said.get_signal_list():
+		print(s["name"], self.said.get_signal_connection_list(s["name"]))
+		pass
+	
+	self.said.emit("Hello static FSignal1! 哈哈哈")
 	pass

@@ -11,9 +11,7 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "FBlockWorld3D.h"
-#include "FSignal/FSignal.h"
-#include "FCallable/FCallable.h"
+#include "FBlockWorld3D/FBlockWorld3D.h"
 
 using namespace godot;
 
@@ -23,8 +21,6 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	}
 
 	GDREGISTER_CLASS(FBlockWorld3D);
-	FRegisterFSignal;
-	FRegisterFCallable;
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

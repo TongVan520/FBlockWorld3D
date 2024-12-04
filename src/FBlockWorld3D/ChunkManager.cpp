@@ -16,7 +16,7 @@ namespace fireflower {
 		if (state == ChunkState::Loading || state == ChunkState::Loaded) {
 			return;
 		}
-		this->chunkLoadRequested.emitSignal(chunk_positionVec3i);
+		// this->chunkLoadRequested.emitSignal(chunk_positionVec3i);
 	}
 	
 	void ChunkManager::unloadChunk(const Vector3i& chunk_positionVec3i) {
@@ -24,7 +24,7 @@ namespace fireflower {
 		if (state == ChunkState::Unloading || state == ChunkState::Unloaded) {
 			return;
 		}
-		this->chunkUnloadRequested.emitSignal(chunk_positionVec3i);
+		// this->chunkUnloadRequested.emitSignal(chunk_positionVec3i);
 	}
 	
 	void ChunkManager::setLoadedSignal(const Ref<FSignal1>& loadedSignal) {

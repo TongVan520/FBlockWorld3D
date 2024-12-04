@@ -7,7 +7,7 @@
 
 #include <godot_cpp/templates/hash_map.hpp>
 #include <godot_cpp/variant/vector3i.hpp>
-#include "FSignal/FSignal.h"
+#include <FSignal/FSignal.h>
 #include <godot_cpp/classes/ref.hpp>
 
 namespace fireflower {
