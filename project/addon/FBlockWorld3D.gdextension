@@ -1,7 +1,10 @@
 [configuration]
-entry_symbol = "example_library_init"
+entry_symbol = "initFBlockWorld3DLibrary"
 compatibility_minimum = "4.3"
 
 [libraries]
-windows.debug.x86_64 = "res://../bin/FBlockWorld3D.windows.template_debug.dev.x86_64.dll"
-;windows.release.x86_64 = "res://bin/libgdexample.windows.template_release.x86_64.dll"
+windows.debug.x86_64 = "res://../bin/debug/FBlockWorld3D.dll"
+; windows.release.x86_64 = "res://bin/libgdexample.windows.template_release.x86_64.dll"
+
+[dependencies]
+windows.debug.x86_64 = "res://../bin/debug/FSignal.dll"
