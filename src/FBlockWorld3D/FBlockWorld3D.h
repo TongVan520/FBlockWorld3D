@@ -16,6 +16,15 @@
 #include "../GodotHelper/GodotHelper.h"
 #include "ChunkManager.h"
 #include "FRegion3i.h"
+#include "FInnateTerrianMaid.h"
+#include "FAcquiredTerrainMaid.h"
+
+
+#define FRegisterFBlockWorld3D GDREGISTER_CLASS(fireflower::FBlockWorld3D)
+
+#define FRegisterModule_FBlockWorld3D \
+FRegisterFBlockWorld3D;               \
+
 
 using godot::Node3D, godot::GridMap, godot::Vector3i;
 
@@ -26,6 +35,7 @@ namespace fireflower {
 	GDCLASS(FBlockWorld3D, Node3D);
 	
 	DirectChildNodeRef(GridMap, GridMap, "GridMap");
+	DirectChildNodeRef(FSeedInnateTerrainMaid, FInnateTerrainMaid, "FInnateTerrainMaid");
 	
 	private:
 		/// @名称 区块大小
@@ -58,9 +68,9 @@ namespace fireflower {
 		FRegion3i last_ignoreRegion3i;
 	
 	public:
-		Ref<FSignal1> chunkSizeChanged;
-		Ref<FSignal1> loadChunkSizeChanged;
-		Ref<FSignal1> currentChunkPositionChanged;
+		Ref<FSignal1> chunkSizeChanged = memnew(FSignal1);
+		Ref<FSignal1> loadChunkSizeChanged = memnew(FSignal1);
+		Ref<FSignal1> currentChunkPositionChanged = memnew(FSignal1);
 	
 	public:
 		FBlockWorld3D();

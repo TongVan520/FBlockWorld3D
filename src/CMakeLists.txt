@@ -34,9 +34,15 @@ add_library(
         FBlockWorld3D/FBlockWorld3D.cpp
         FBlockWorld3D/ChunkManager.cpp
         FBlockWorld3D/FRegion3i.cpp
+        FBlockWorld3D/FInnateTerrianMaid.cpp
+        FBlockWorld3D/FInnateTerrianMaid.h
+        FBlockWorld3D/FBlock.cpp
+        FBlockWorld3D/FBlock.h
+        FBlockWorld3D/FAcquiredTerrainMaid.cpp
+        FBlockWorld3D/FAcquiredTerrainMaid.h
 )
 
 set(FSignal_ROOT "${PROJECT_SOURCE_DIR}/../tool/FSignal")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../tool/FSignal/cmake")
 find_package(FSignal REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE FSignal::FSignal)
+target_link_libraries(${PROJECT_NAME} PRIVATE FSignal::FSignal-static)

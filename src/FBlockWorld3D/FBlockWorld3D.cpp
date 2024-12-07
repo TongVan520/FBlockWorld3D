@@ -54,6 +54,54 @@ namespace fireflower {
 				}
 			)
 		);
+		
+		// 设置 加载区块回调
+		this->chunk_manager.chunkLoadRequested->connect(
+			FSlot1::makeFromLambda(
+				[this](const Variant& chunk_position) {
+					auto chunk_positionVec3i = VariantCaster<Vector3i>::cast(chunk_position);
+					
+					for (int32_t index_x = 0; index_x < this->chunk_sizeVec3i.x; index_x++) {
+						for (int32_t index_y = 0; index_y < this->chunk_sizeVec3i.y; index_y++) {
+							for (int32_t index_z = 0; index_z < this->chunk_sizeVec3i.z; index_z++) {
+								auto block_positionVec3i = chunk_positionVec3i + Vector3i(index_x, index_y, index_z);
+								// TODO 优先获取后天地形，无效再获取先天地形
+								auto block = this->getFInnateTerrainMaid()->getBlock(block_positionVec3i);
+								if (block) {
+									continue;
+								}
+								this->getGridMap()
+									->set_cell_item(block_positionVec3i, block->getId(), block->getOrientation());
+							}
+						}
+					}
+					
+					// TODO 触发区块加载完成信号
+					// this->chunk_manager->
+				}
+			)
+		);
+		
+		// 设置 卸载区块回调
+		this->chunk_manager.chunkUnloadRequested->connect(
+			FSlot1::makeFromLambda(
+				[this](const Variant& chunk_position) {
+					auto chunk_positionVec3i = VariantCaster<Vector3i>::cast(chunk_position);
+					
+					for (int32_t index_x = 0; index_x < this->chunk_sizeVec3i.x; index_x++) {
+						for (int32_t index_y = 0; index_y < this->chunk_sizeVec3i.y; index_y++) {
+							for (int32_t index_z = 0; index_z < this->chunk_sizeVec3i.z; index_z++) {
+								auto block_positionVec3i = chunk_positionVec3i + Vector3i(index_x, index_y, index_z);
+								this->getGridMap()
+									->set_cell_item(block_positionVec3i, GridMap::INVALID_CELL_ITEM);
+							}
+						}
+					}
+					
+					// TODO 触发区块卸载完成信号
+				}
+			)
+		);
 	}
 	
 	void FBlockWorld3D::sayHello() {
@@ -63,7 +111,7 @@ namespace fireflower {
 	
 	void FBlockWorld3D::_ready() {
 		this->initRefGridMap();
-		UtilityFunctions::print(L"this->getGridMap() == ", this->getGridMap());
+		this->initRefFInnateTerrainMaid();
 	}
 	
 	void FBlockWorld3D::setChunkSize(const Vector3i& new_chunk_sizeVec3i) {
@@ -139,8 +187,7 @@ namespace fireflower {
 					"chunkSizeChanged",
 					PROPERTY_HINT_NONE,
 					"",
-					PROPERTY_USAGE_DEFAULT,
-					FSignal1::get_class_static()
+					PROPERTY_USAGE_SCRIPT_VARIABLE
 				),
 				"",
 				"getChunkSizeChangedSignal"
@@ -174,8 +221,7 @@ namespace fireflower {
 					"loadChunkSizeChanged",
 					PROPERTY_HINT_NONE,
 					"",
-					PROPERTY_USAGE_DEFAULT,
-					FSignal1::get_class_static()
+					PROPERTY_USAGE_SCRIPT_VARIABLE
 				),
 				"",
 				"getLoadChunkSizeChangedSignal"
@@ -209,8 +255,7 @@ namespace fireflower {
 					"currentChunkPositionChanged",
 					PROPERTY_HINT_NONE,
 					"",
-					PROPERTY_USAGE_DEFAULT,
-					FSignal1::get_class_static()
+					PROPERTY_USAGE_SCRIPT_VARIABLE
 				),
 				"",
 				"getCurrentChunkPositionChangedSignal"
